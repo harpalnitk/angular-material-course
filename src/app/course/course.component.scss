@@ -15,6 +15,9 @@
   text-align: left;
   margin: 10px auto;
 }
+.collapsed-detail{
+  display: none;
+}
 
 .duration-cell {
   text-align: center;
@@ -52,7 +55,7 @@ mat-paginator {
 .spinner-container mat-spinner {
   margin: 130px auto 0 auto;
 }
-
+// these classes added automatically to each column
 .mat-column-seqNo {
   width: 32px;
   border-right: 1px solid black;

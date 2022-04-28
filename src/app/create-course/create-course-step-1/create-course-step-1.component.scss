@@ -9,3 +9,12 @@
   margin-bottom: 15px;
 }
 
+mat-radio-button{
+  margin-right: 5px;
+}
+//will not work here because template of datepicker is different
+//needs to applied globally
+// .highlight-date{
+//   background: red;
+// }
+

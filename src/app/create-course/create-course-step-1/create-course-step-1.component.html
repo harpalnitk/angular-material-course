@@ -1,5 +1,62 @@
 <div [formGroup]="form" class="course-details-form">
+<!-- <mat-form-field floatLabel='never'> -->
+    <mat-form-field>
+    <input matInput placeholder="Course title" formControlName="title" #title>
+<!-- <span matPrefix>+91</span>
+<span matSuffix>.00</span> -->
+<mat-hint align="end">
+    {{title.value.length}}/60
+</mat-hint>
+<mat-error *ngIf="courseTitle.errors?.minlength">A minimum length of 5 character is required.</mat-error>
+</mat-form-field>
+<!-- apperance = fill, outline 
+    <mat-form-field appearance="fill">
+    <input matInput placeholder="Course title" formControlName="title">
+</mat-form-field> -->
 
+<mat-radio-group class="course-type" formControlName="courseType">
+    <mat-radio-button value="free">Free</mat-radio-button>
+    <mat-radio-button value="premium">Premium</mat-radio-button>
+</mat-radio-group>
+
+<mat-form-field appearance="fill">
+    <mat-select formControlName="category" placeholder="Select Category">
+        <!-- <mat-option>None</mat-option> 
+        will send null value to form and thus
+    mandatory field will show error
+useful in cases where select box is not mandatory required-->
+        <mat-option value="beginners">BEGINNERS</mat-option>
+        <mat-option value="intermediate">INTERMEDIATE</mat-option>
+        <mat-option value="advanced">ADVANCED</mat-option>
+
+        <mat-optgroup label="Beginners">
+            <mat-option value="newprogramming">New to programming</mat-option>
+            <mat-option value="newjavascript">New to Javascript</mat-option>
+            <mat-option value="newangular">New to Abgular</mat-option>
+        </mat-optgroup>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+<input matInput formControlName="releasedAt" 
+placeholder="Release Date"
+[matDatepicker]="releasedAtPicker">
+<mat-datepicker-toggle matSuffix [for]="releasedAtPicker"></mat-datepicker-toggle>
+<mat-datepicker #releasedAtPicker [dateClass]="dateClass"></mat-datepicker>
+</mat-form-field>
+<mat-checkbox formControlName="downloadsAllowed"
+ color="primary"
+ [indeterminate]="true">Downloads allowed</mat-checkbox>
+
+ <mat-form-field  appearance="outline">
+     <textarea 
+     matInput 
+     placeholder="Description" 
+     formControlName="longDescription"
+     cdkTextareaAutosize
+     [cdkAutosizeMinRows]="2"
+     [cdkAutosizeMaxRows]="5"></textarea>
+ </mat-form-field>
 
 </div>
 
