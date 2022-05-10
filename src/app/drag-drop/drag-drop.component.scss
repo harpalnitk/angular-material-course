@@ -1,3 +1,9 @@
+// _ in mixins file name means its a partial
+// file which can be easily included
+// in other files
+@import '../../mixins';
+//@include is scss functionality
+@include drag-drop();
 
 .drag-drop-container {
   font-family: "Roboto";

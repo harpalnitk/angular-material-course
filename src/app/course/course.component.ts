@@ -8,6 +8,7 @@ import {Course} from "../model/course";
 import {CoursesService} from "../services/courses.service";
 import {debounceTime, distinctUntilChanged, startWith, tap, delay, catchError, finalize} from 'rxjs/operators';
 import {merge, fromEvent, throwError} from "rxjs";
+import { SelectionModel } from '@angular/cdk/collections';
 
 
 @Component({
@@ -102,12 +103,16 @@ export class CourseComponent implements OnInit, AfterViewInit {
     //   }
     // ];
 
-    displayedColumns =['seqNo','description','duration'];
+    displayedColumns =['select','seqNo','description','duration'];
 
     @ViewChild(MatPaginator)
     paginator: MatPaginator;
     @ViewChild(MatSort)
     sort:MatSort;
+    //For Selection
+    selection= new SelectionModel<Lesson>(true,[]);
+    //first true: whether we want to allow multiple selection or not
+    //[] is initial selection of the user
 
     constructor(private route: ActivatedRoute,
                 private coursesService: CoursesService) {
@@ -139,6 +144,23 @@ export class CourseComponent implements OnInit, AfterViewInit {
     )
     .subscribe();
   }
+//for row selection
+  onLessonToggled(lesson:Lesson){
+this.selection.toggle(lesson);
+console.log(this.selection.selected);
+  }
+  isAllSelected(){
+    return this.selection.selected?.length == this.lessons?.length;
+  }
+  toggleAll(){
+    if(this.isAllSelected()){
+      this.selection.clear();
+    }else{
+      this.selection.select(...this.lessons);
+    }
+  }
+
+  //for row detail
   onToggleLesson(lesson:Lesson){
     console.log('lesson',lesson);
     console.log('expanded lesson',this.expandedLesson);

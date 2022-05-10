@@ -89,5 +89,24 @@ export class DragDropComponent {
       courseId: 11
     }
   ];
+  done=[];
+  dropMultiList(event:CdkDragDrop<Lesson[]>){
+if(event.previousContainer == event.container){
+  moveItemInArray(this.lessons,event.previousIndex,event.currentIndex);
+}else{
+  transferArrayItem(
+    event.previousContainer.data,
+    event.container.data,
+    event.previousIndex,
+    event.currentIndex
+  );
+}
+  }
 
+  drop(event:CdkDragDrop<Lesson[]>){
+console.log(`previous Index = ${event.previousIndex}`);
+console.log(`current Index = ${event.currentIndex}`);
+//this will directly mutate the lessons array
+moveItemInArray(this.lessons,event.previousIndex,event.currentIndex);
+  }
 }
